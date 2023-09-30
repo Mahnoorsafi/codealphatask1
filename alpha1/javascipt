@@ -1,0 +1,40 @@
+const css = document.querySelector("h3");
+const color1 = document.querySelector(".color1");
+const color2 = document.querySelector(".color2");
+const randomButton = document.querySelector(".random-button");
+const body = document.getElementById("gradient");
+
+// Function to set the gradient
+function setGradient() {
+  const gradientValue = `linear-gradient(to right, ${color1.value}, ${color2.value})`;
+  body.style.background = gradientValue;
+  css.textContent = `${gradientValue};`;
+}
+
+// Function to generate a random color
+function randomColor() {
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += Math.floor(Math.random() * 16).toString(16);
+  }
+  return color;
+}
+
+// Function to set random colors and update the gradient
+function setRandomColor() {
+  color1.value = randomColor();
+  color2.value = randomColor();
+  setGradient();
+  randomButton.style.backgroundColor = randomColor(); // Set the random background color for the button
+}
+
+// Event listeners for color input changes
+color1.addEventListener("input", setGradient);
+color2.addEventListener("input", setGradient);
+
+// Event listener for the "Random" button
+randomButton.addEventListener("click", setRandomColor);
+
+// Initial setup
+setGradient();
+
